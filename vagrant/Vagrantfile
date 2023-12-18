@@ -49,15 +49,15 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.synced_folder ".", "/vagrant", disabled: true
 
-    webserver.vm.network "forwarded_port", guest: 22, host: "2235", host_ip: "127.0.0.1"
-
     webserver.vm.hostname = "webserver"
+
+    webserver.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
 
     webserver.vm.network "private_network", virtualbox__intnet: "server"
 
     webserver.vm.provider "virtualbox" do |vb|
 
-      vb.customize ["modifyvm", :id, "--nic1", "server"]
+      vb.customize ["modifyvm", :id, "--nic1", "none"]
       vb.gui = false
       vb.name = "webserver"
       vb.memory = 2048
