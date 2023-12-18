@@ -5,6 +5,8 @@ Vagrant.configure("2") do |config|
     dhcp_server.vm.box = "tvlooy/openbsd-7.4-amd64"
     dhcp_server.vm.box_version = "20231929"
 
+    dhcp_server.ssh.shell = "/bin/ksh"
+
     dhcp_server.vm.synced_folder ".", "/vagrant", disabled: true
 
     dhcp_server.vm.hostname = "dhcpserver"
@@ -24,7 +26,7 @@ Vagrant.configure("2") do |config|
       vb.name = "dhcp_server"
       vb.memory = 2048
       vb.cpus = 2
-      
+
 
     end
 
