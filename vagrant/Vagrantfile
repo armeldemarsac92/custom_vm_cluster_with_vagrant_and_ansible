@@ -11,13 +11,13 @@ Vagrant.configure("2") do |config|
 
     dhcp_server.vm.hostname = "dhcpserver"
 
-    dhcp_server.vm.network "private_network", ip: "192.168.42.0",
+    dhcp_server.vm.network "private_network", ip: "192.168.42.1",
       virtualbox__intnet: "administration"
     
-    dhcp_server.vm.network "private_network", ip: "192.168.42.64",
+    dhcp_server.vm.network "private_network", ip: "192.168.42.65",
       virtualbox__intnet: "server"
 
-    dhcp_server.vm.network "private_network", ip: "192.168.42.128",
+    dhcp_server.vm.network "private_network", ip: "192.168.42.129",
       virtualbox__intnet: "employee"
 
 
