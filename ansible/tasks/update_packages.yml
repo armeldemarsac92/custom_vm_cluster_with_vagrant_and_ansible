@@ -1,0 +1,4 @@
+- name: Update the pkg manager
+  ansible.builtin.pkgin:
+    name: '*'
+    state: latest
