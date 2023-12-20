@@ -1,0 +1,5 @@
+- name: Create mysql database
+  community.mysql.mysql_db:
+    name:
+      - nsa501
+    state: present

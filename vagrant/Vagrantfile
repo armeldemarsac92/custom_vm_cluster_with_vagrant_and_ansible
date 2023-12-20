@@ -57,17 +57,23 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.provider "virtualbox" do |vb|
 
-      vb.customize ["modifyvm", :id, "--nic1", "none"]
+      #vb.customize ["modifyvm", :id, "--nic1", "none"]
       vb.gui = false
       vb.name = "webserver"
       vb.memory = 2048
       vb.cpus = 2
 
     end
-    
-    # webserver.vm.provision "ansible" do |ansible|
 
-    #   ansible.playbook = "vm-config.yml"
+    webserver.vm.provision "shell", inline: <<-SHELL
+      pkg install -y python39
+    SHELL
+    
+    webserver.vm.provision "ansible" do |ansible|
+
+      ansible.playbook = "vm-config.yml"
+
+    end
 
   end
 

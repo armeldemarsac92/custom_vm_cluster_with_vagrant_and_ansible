@@ -1,0 +1,8 @@
+- name: Create a user
+  community.mysql.mysql_user:
+    name: backend
+    password: Bit8Q6a6G
+    priv: nsa501.*:ALL
+    state: present
+    column_case_sensitive: false
+

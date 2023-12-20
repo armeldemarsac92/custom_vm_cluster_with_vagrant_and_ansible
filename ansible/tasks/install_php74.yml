@@ -1,8 +1,0 @@
-- name : Install php7.4 and extensions
-  pkgng:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - php74
-    - php74-extensions
-  notify: check php version

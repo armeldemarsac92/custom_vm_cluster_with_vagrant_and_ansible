@@ -1,0 +1,16 @@
+hostname="freebsd"
+firstboot_freebsd_update_enable=YES
+firstboot_pkgs_enable=YES
+growfs_enable=YES
+firstboot_pkgs_list="sudo rsync virtualbox-ose-additions-nox11"
+vboxguest_enable="YES"
+vboxservice_enable="YES"
+ifconfig_DEFAULT="SYNCDHCP"
+sshd_enable="YES"
+sendmail_enable="NO"
+sendmail_submit_enable="NO"
+sendmail_outbound_enable="NO"
+sendmail_msp_queue_enable="NO"
+mysql_enable="YES"
+nginx_enable="YES"
+php_fpm_enable="YES"

@@ -1,0 +1,3 @@
+- name: Install mysql80
+  become: yes
+  ansible.builtin.raw: pkg install -y mysql80-server py39-pymysql

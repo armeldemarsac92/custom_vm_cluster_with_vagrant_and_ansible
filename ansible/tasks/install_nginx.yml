@@ -1,6 +1,0 @@
-- name: Install nginx
-  become: yes
-  pkgng:
-    name: nginx
-    state: present
-  notify: restart nginx
