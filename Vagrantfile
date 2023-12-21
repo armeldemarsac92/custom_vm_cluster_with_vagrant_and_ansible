@@ -32,8 +32,9 @@ Vagrant.configure("2") do |config|
 
 
     # To setup python39
-    webserver.vm.provision "shell", inline: <<-SHELL
-      pkg install -y python39
+    dhcp_server.vm.provision "shell", inline: <<-SHELL
+    pkg_add python3
+    ln -s /usr/local/bin/python3 /usr/bin/python
     SHELL
 
     dhcp_server.vm.provision "ansible" do |ansible|
@@ -90,10 +91,6 @@ Vagrant.configure("2") do |config|
 
   #   employee.vm.hostname = "employee"
 
-    # To setup python39
-    webserver.vm.provision "shell", inline: <<-SHELL
-      pkg install -y python39
-    SHELL
   #   employee.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
 
   #   employee.vm.network "private_network", virtualbox__intnet: "employee"

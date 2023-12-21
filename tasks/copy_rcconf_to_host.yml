@@ -1,6 +1,7 @@
+# Copy the file rc.conf.local to the host, we specify the path for the src and dest where we want to copy it
 - name: Copy rc.conf to host
   copy:
-    src: ../rc.conf.local
+    src: ./ressources/webserver/rc.conf.local
     dest: /etc
     remote_src: no
     mode: "0755"

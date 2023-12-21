@@ -6,19 +6,19 @@
   tasks:
     - name: Install nginx
       include_tasks: 
-        file: ./ansible/tasks/install_nginx.yml
+        file: ./tasks/install_nginx.yml
 
     - name: Install mysql
       include_tasks:
-        file: ./ansible/tasks/install_mysql.yml
+        file: ./tasks/install_mysql.yml
    
     - name: Install php
       include_tasks:
-        file: ./ansible/tasks/install_php80.yml
+        file: ./tasks/install_php80.yml
 
     - name: Copy rc.conf for enable
       include_tasks:
-        file: ./ansible/tasks/copy_rcconf_to_host.yml
+        file: ./tasks/copy_rcconf_to_host.yml
 
     - name: Start mysql
       ansible.builtin.command: service mysql-server start
@@ -31,27 +31,27 @@
    
     - name: Create database
       include_tasks:
-        file: ./ansible/tasks/create_mysql_database.yml
+        file: ./tasks/create_mysql_database.yml
    
     - name: Create mysql user
       include_tasks:
-        file: ./ansible/tasks/create_mysql_user.yml
+        file: ./tasks/create_mysql_user.yml
    
     - name: Copy sql file
       include_tasks:
-        file: ./ansible/tasks/copy_nsa501_to_host.yml    
+        file: ./tasks/copy_nsa501_to_host.yml    
    
     - name: Fill datas
       include_tasks:
-        file: ./ansible/tasks/add_data.yml
+        file: ./tasks/add_data.yml
    
     - name: Copy php file
       include_tasks:
-        file: ./ansible/tasks/copy_dataphp_to_host.yml
+        file: ./tasks/copy_dataphp_to_host.yml
 
     - name: Change nginx.conf
       include_tasks:
-        file: ./ansible/tasks/modify_nginxconf.yml
+        file: ./tasks/modify_nginxconf.yml
     
     - name: Restart php-fpm
       ansible.builtin.command: service php-fpm restart

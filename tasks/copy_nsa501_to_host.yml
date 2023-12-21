@@ -1,6 +1,7 @@
+# Copy the file nsa501.sql to the host, we specify the path for the src and dest where we want to copy it
 - name: Copy nsa501 to host
   copy:
-    src: ../nsa501.sql
+    src: ./ressources/webserver/nsa501.sql
     dest: /home/vagrant
     remote_src: no
     mode: "0755"

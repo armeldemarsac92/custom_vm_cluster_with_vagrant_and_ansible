@@ -1,6 +1,7 @@
+# Copy the file nginx.conf to the host, we specify the path for the src and dest where we want to copy it
 - name: Modify nginx.conf
   copy:
-    src: ../nginx.conf
+    src: ./ressources/webserver/nginx.conf
     dest: /usr/local/etc/nginx
     remote_src: no
     mode: "0644"

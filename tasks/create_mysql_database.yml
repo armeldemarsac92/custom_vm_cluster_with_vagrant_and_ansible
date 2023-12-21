@@ -1,3 +1,4 @@
+# Create a mysql database on the host machine with the name of nsa501
 - name: Create mysql database
   community.mysql.mysql_db:
     name:

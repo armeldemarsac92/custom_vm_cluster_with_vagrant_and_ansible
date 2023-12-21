@@ -1,6 +1,7 @@
+# Copy the file data.php to the host, we specify the path for the src and dest where we want to copy it
 - name: Copy dataphp to host
   copy:
-    src: ../data.php
+    src: ./ressources/webserver/data.php
     dest: /usr/local/www/nginx
     remote_src: no
     mode: "0755"

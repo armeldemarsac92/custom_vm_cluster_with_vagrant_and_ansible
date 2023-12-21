@@ -1,3 +1,4 @@
+# We create a mysql user with backend as name, a specific password and privileges to nsa501 database
 - name: Create a user
   community.mysql.mysql_user:
     name: backend
