@@ -63,8 +63,6 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.hostname = "webserver"
 
-    #webserver.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
-
     webserver.vm.network "private_network", type: "dhcp", virtualbox__intnet: "server"
 
     webserver.ssh.host = "localhost"
@@ -95,48 +93,45 @@ Vagrant.configure("2") do |config|
 
   end
 
-  # config.vm.define "employee" do |employee|
+  config.vm.define "employee" do |employee|
     
-  #   employee.vm.box = "debian/buster64"
+    employee.vm.box = "debian/buster64"
 
-  #   employee.vm.synced_folder ".", "/vagrant", disabled: true
+    employee.vm.synced_folder ".", "/vagrant", disabled: true
 
-  #   employee.vm.hostname = "employee"
+    employee.vm.hostname = "employee"
 
-  #   employee.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
+    employee.vm.network "private_network", virtualbox__intnet: "employee"
 
-  #   employee.vm.network "private_network", virtualbox__intnet: "employee"
+    employee.vm.provider "virtualbox" do |vb|
 
-  #   employee.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--nic1", "none"]
+      vb.gui = true
+      vb.name = "employee"
+      vb.memory = 4096
+      vb.cpus = 4
 
-  #     #vb.customize ["modifyvm", :id, "--nic1", "none"]
-  #     vb.gui = true
-  #     vb.name = "employee"
-  #     vb.memory = 4096
-  #     vb.cpus = 4
+    end
 
-  #   end
-
-    # config.vm.define "administration" do |administration|
+    config.vm.define "administration" do |administration|
     
-    #   administration.vm.box = "debian/buster64"
+      administration.vm.box = "debian/buster64"
   
-    #   administration.vm.synced_folder ".", "/vagrant", disabled: true
+      administration.vm.synced_folder ".", "/vagrant", disabled: true
   
-    #   administration.vm.hostname = "administration"
+      administration.vm.hostname = "administration"
   
-    #   administration.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
   
-    #   administration.vm.network "private_network", virtualbox__intnet: "administration"
+      administration.vm.network "private_network", virtualbox__intnet: "administration"
   
-    #   administration.vm.provider "virtualbox" do |vb|
+      administration.vm.provider "virtualbox" do |vb|
   
-    #     #vb.customize ["modifyvm", :id, "--nic1", "none"]
-    #     vb.gui = true
-    #     vb.name = "administration"
-    #     vb.memory = 4096
-    #     vb.cpus = 4
+        vb.customize ["modifyvm", :id, "--nic1", "none"]
+        vb.gui = true
+        vb.name = "administration"
+        vb.memory = 4096
+        vb.cpus = 4
   
-    #   end
+      end
 
 end
