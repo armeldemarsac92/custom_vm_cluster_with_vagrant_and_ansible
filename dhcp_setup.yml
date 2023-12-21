@@ -4,10 +4,10 @@
   tasks:
 
     - name: Setup the dhcp server
-      include_tasks: ./ansible/tasks/setup_dhcp_server.yml
+      include_tasks: ./tasks/setup_dhcp_server.yml
 
     - name: Setup the packet filtering
-      include_tasks: ./ansible/tasks/setup_packet_filter.yml
+      include_tasks: ./tasks/setup_packet_filter.yml
 
   handlers:
 
@@ -22,9 +22,7 @@
 
     - name: enable pf at boot
       command: pfctl -e
-
-    - name: enable ip forwarding
-      command: dhcpserver# sysctl -w net.inet.ip.forwarding=1 
+      ignore_errors: true
 
     - name: restart the network service
       command: sh /etc/netstart

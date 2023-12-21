@@ -5,5 +5,3 @@
     password: Bit8Q6a6G
     priv: nsa501.*:ALL
     state: present
-    column_case_sensitive: false
-

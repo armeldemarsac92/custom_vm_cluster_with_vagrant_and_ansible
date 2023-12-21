@@ -1,9 +1,5 @@
-- name: Cp pf.conf file to dest
-  copy:
-    src: ../../ressources/pf.conf
-    dest: /etc/
-    remote_src: no
-    mode: "0755"
+- name: enable ip forwarding
+  ansible.builtin.command: sysctl -w net.inet.ip.forwarding=1 
   notify:
     - apply changes to pf
     - enable pf at boot

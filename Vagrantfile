@@ -9,7 +9,13 @@ Vagrant.configure("2") do |config|
 
     dhcp_server.vm.synced_folder ".", "/vagrant", disabled: true
 
-    dhcp_server.vm.network "forwarded_port", guest: 3500, host 3500
+    #open port 3500 for ssh redirection through bastion host
+
+    dhcp_server.vm.network "forwarded_port", guest: 3500, host: 3500
+
+    #open port 3501 for http redirection through gateway
+
+    dhcp_server.vm.network "forwarded_port", guest: 3501, host: 3501
 
     dhcp_server.vm.hostname = "dhcpserver"
 
@@ -35,8 +41,7 @@ Vagrant.configure("2") do |config|
 
     # To setup python39
     dhcp_server.vm.provision "shell", inline: <<-SHELL
-    pkg_add python3
-    ln -s /usr/local/bin/python3 /usr/bin/python
+      pkg_add -r python-3.9.18
     SHELL
 
     dhcp_server.vm.provision "ansible" do |ansible|
@@ -58,7 +63,9 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.hostname = "webserver"
 
-    webserver.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
+    #webserver.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
+
+    webserver.vm.network "private_network", type: "dhcp", virtualbox__intnet: "server"
 
     webserver.ssh.host = "localhost"
 
@@ -67,6 +74,7 @@ Vagrant.configure("2") do |config|
     webserver.vm.provider "virtualbox" do |vb|
 
       vb.customize ["modifyvm", :id, "--nic1", "none"]
+      vb.customize ["modifyvm", :id, "--macaddress2", "080027123456"]
       vb.gui = false
       vb.name = "webserver"
       vb.memory = 2048

@@ -6,7 +6,7 @@
     src: "{{ item }}"
     dest: "/etc/"
   with_fileglob:
-    - "../../ressources/*"
+    - "../ressources/dhcp/*"
 
 
 - name: Force handler to run

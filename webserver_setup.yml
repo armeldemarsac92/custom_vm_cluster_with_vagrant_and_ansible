@@ -22,12 +22,15 @@
 
     - name: Start mysql
       ansible.builtin.command: service mysql-server start
+      ignore_errors: true
 
     - name: Start nginx
       ansible.builtin.command: service nginx start
+      ignore_errors: true
 
     - name: Start php-fpm
       ansible.builtin.command: service php-fpm start
+      ignore_errors: true
    
     - name: Create database
       include_tasks:
