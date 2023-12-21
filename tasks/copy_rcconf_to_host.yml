@@ -1,0 +1,6 @@
+- name: Copy rc.conf to host
+  copy:
+    src: ../rc.conf.local
+    dest: /etc
+    remote_src: no
+    mode: "0755"

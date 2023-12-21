@@ -1,0 +1,3 @@
+- name: Install nginx
+  become: yes 
+  ansible.builtin.raw: pkg install -y nginx

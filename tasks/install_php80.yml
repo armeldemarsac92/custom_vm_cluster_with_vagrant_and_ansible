@@ -1,0 +1,2 @@
+- name : Install php8.0 and extensions
+  ansible.builtin.raw: pkg install -y php80 php80-extensions php80-mysqli

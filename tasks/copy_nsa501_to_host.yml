@@ -1,0 +1,6 @@
+- name: Copy nsa501 to host
+  copy:
+    src: ../nsa501.sql
+    dest: /home/vagrant
+    remote_src: no
+    mode: "0755"

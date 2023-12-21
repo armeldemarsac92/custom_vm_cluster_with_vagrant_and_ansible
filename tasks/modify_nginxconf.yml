@@ -1,0 +1,6 @@
+- name: Modify nginx.conf
+  copy:
+    src: ../nginx.conf
+    dest: /usr/local/etc/nginx
+    remote_src: no
+    mode: "0644"

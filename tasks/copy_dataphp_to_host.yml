@@ -1,0 +1,6 @@
+- name: Copy dataphp to host
+  copy:
+    src: ../data.php
+    dest: /usr/local/www/nginx
+    remote_src: no
+    mode: "0755"
