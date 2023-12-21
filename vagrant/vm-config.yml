@@ -8,23 +8,14 @@
       include_tasks: 
         file: ./ansible/tasks/install_nginx.yml
 
-    # - name: Enable nginx
-    #   ansible.builtin.command: echo 'nginx_enable="YES"' >> /etc/rc.conf
-
     - name: Install mysql
       include_tasks:
         file: ./ansible/tasks/install_mysql.yml
-        
-    # - name: Enable mysql
-    #   ansible.builtin.command: echo 'mysql_enable="YES"' >> /etc/rc.conf
-
    
     - name: Install php
       include_tasks:
         file: ./ansible/tasks/install_php80.yml
 
-    # - name: Enable php-fpm
-    #   ansible.builtin.command: echo 'php_fpm_enable="YES"' >> /etc/rc.conf
     - name: Copy rc.conf for enable
       include_tasks:
         file: ./ansible/tasks/copy_rcconf_to_host.yml
@@ -45,9 +36,6 @@
     - name: Create mysql user
       include_tasks:
         file: ./ansible/tasks/create_mysql_user.yml
-
-    # - name: Flush privileges
-    #   command: 
    
     - name: Copy sql file
       include_tasks:
