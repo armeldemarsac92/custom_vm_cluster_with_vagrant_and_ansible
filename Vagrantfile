@@ -9,6 +9,8 @@ Vagrant.configure("2") do |config|
 
     dhcp_server.vm.synced_folder ".", "/vagrant", disabled: true
 
+    dhcp_server.vm.network "forwarded_port", guest: 3500, host 3500
+
     dhcp_server.vm.hostname = "dhcpserver"
 
     dhcp_server.vm.network "private_network", ip: "192.168.42.0",
@@ -58,7 +60,9 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.network "forwarded_port", guest: 22, host: 2200, disabled: true
 
-    webserver.vm.network "private_network", virtualbox__intnet: "server"
+    webserver.ssh.host = "localhost"
+
+    webserver.ssh.port = 3500
 
     webserver.vm.provider "virtualbox" do |vb|
 
