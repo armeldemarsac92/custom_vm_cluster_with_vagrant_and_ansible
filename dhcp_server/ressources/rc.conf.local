@@ -1,0 +1,2 @@
+dhcpd_flags="em1 em2 em3"
+gateway_enable="YES"

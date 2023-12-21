@@ -1,0 +1,15 @@
+# - hosts: dhcpserver
+#   become: yes
+
+#   tasks:
+
+#     - name: Update packages
+#       include_tasks: ./ansible/tasks/update_packages.yml
+
+#     - name: Setup the dhcp server
+#       include_tasks: ./ansible/tasks/setup_dhcp_server.yml
+
+#   # handlers:
+
+#   #   - name: restart dhcpd server
+#   #     command: 

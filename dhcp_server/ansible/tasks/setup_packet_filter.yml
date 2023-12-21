@@ -1,0 +1,10 @@
+- name: Cp pf.conf file to dest
+  copy:
+    src: ../../ressources/pf.conf
+    dest: /etc/
+    remote_src: no
+    mode: "0755"
+  notify:
+    - apply changes to pf
+    - enable pf at boot
+    - restart the network service
