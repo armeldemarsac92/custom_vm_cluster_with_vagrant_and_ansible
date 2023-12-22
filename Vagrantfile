@@ -13,6 +13,11 @@ Vagrant.configure("2") do |config|
 
     dhcp_server.vm.network "forwarded_port", guest: 3500, host: 3500
 
+    #open port 3502 and 3503 for ssh redirection through bastion host
+
+    dhcp_server.vm.network "forwarded_port", guest: 3502, host: 3502
+    dhcp_server.vm.network "forwarded_port", guest: 3503, host: 3503
+
     #open port 3501 for http redirection through gateway
 
     dhcp_server.vm.network "forwarded_port", guest: 3501, host: 3501
@@ -71,7 +76,7 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.provider "virtualbox" do |vb|
 
-      vb.customize ["modifyvm", :id, "--nic1", "none"]
+      # vb.customize ["modifyvm", :id, "--nic1", "none"]
       vb.customize ["modifyvm", :id, "--macaddress2", "080027123456"]
       vb.gui = false
       vb.name = "webserver"
@@ -93,45 +98,60 @@ Vagrant.configure("2") do |config|
 
   end
 
+
   config.vm.define "employee" do |employee|
     
-    employee.vm.box = "debian/buster64"
+    employee.vm.box = "hluaces/ubuntu-gnome"
 
     employee.vm.synced_folder ".", "/vagrant", disabled: true
 
     employee.vm.hostname = "employee"
 
-    employee.vm.network "private_network", virtualbox__intnet: "employee"
+    employee.vm.network "private_network", mac: "080027123457", type: "dhcp", adapter: "1", virtualbox__intnet: "employee"
+
+    employee.ssh.host = "localhost"
+
+    employee.ssh.port = 3502
 
     employee.vm.provider "virtualbox" do |vb|
 
-      vb.customize ["modifyvm", :id, "--nic1", "none"]
+      # vb.customize ["modifyvm"]
+      # vb.customize ["modifyvm", :id, "--nic1", "none"]
+      #vb.customize ["modifyvm", :id, "--macaddress1", "080027123457"]
       vb.gui = true
       vb.name = "employee"
-      vb.memory = 4096
-      vb.cpus = 4
+      vb.memory = 2048
+      vb.cpus = 2
 
     end
 
+  end
+
     config.vm.define "administration" do |administration|
     
-      administration.vm.box = "debian/buster64"
+      administration.vm.box = "hluaces/ubuntu-gnome"
   
       administration.vm.synced_folder ".", "/vagrant", disabled: true
   
       administration.vm.hostname = "administration"
   
-  
-      administration.vm.network "private_network", virtualbox__intnet: "administration"
+      administration.vm.network "private_network", type: "dhcp", adapter: "1", virtualbox__intnet: "administration"
+
+      administration.ssh.host = "localhost"
+
+      administration.ssh.port = 3503
   
       administration.vm.provider "virtualbox" do |vb|
   
-        vb.customize ["modifyvm", :id, "--nic1", "none"]
+        # vb.customize ["modifyvm", :id, "--nic1", "none"]
+        vb.customize ["modifyvm", :id, "--macaddress2", "080027123458"]
         vb.gui = true
         vb.name = "administration"
-        vb.memory = 4096
-        vb.cpus = 4
+        vb.memory = 2048
+        vb.cpus = 2
   
       end
+
+    end
 
 end
