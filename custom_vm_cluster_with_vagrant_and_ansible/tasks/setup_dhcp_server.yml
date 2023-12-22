@@ -1,0 +1,20 @@
+- name: Install ISC DHCP server
+  ansible.builtin.raw: pkg_add -Uu isc-dhcp-server
+
+- name: Copy dhcpd conf files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/"
+  with_fileglob:
+    - "../ressources/dhcp/*"
+
+
+- name: Force handler to run
+  command: echo "Forcing handler to run"
+  changed_when: true
+  notify: 
+    - restart the network service
+    - enable dhcp server on reboot
+    - start the dhcp server
+    
+

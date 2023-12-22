@@ -1,0 +1,28 @@
+- hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Setup the dhcp server
+      include_tasks: ./tasks/setup_dhcp_server.yml
+
+    - name: Setup the packet filtering
+      include_tasks: ./tasks/setup_packet_filter.yml
+
+  handlers:
+
+    - name: enable dhcp server on reboot
+      command: rcctl enable dhcpd
+
+    - name: start the dhcp server
+      command: rcctl start dhcpd
+
+    - name: apply changes to pf
+      command: pfctl -f /etc/pf.conf
+
+    - name: enable pf at boot
+      command: pfctl -e
+      ignore_errors: true
+
+    - name: restart the network service
+      command: sh /etc/netstart

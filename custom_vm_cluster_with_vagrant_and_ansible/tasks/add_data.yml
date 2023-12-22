@@ -1,0 +1,6 @@
+# This task import the .sql file in /home/vagrant and put it in the nsa501 database
+- name: Add data website
+  community.mysql.mysql_db:
+    name: nsa501
+    state: import
+    target: /home/vagrant/nsa501.sql
