@@ -21,7 +21,7 @@ webserver.vm.network "private_network", mac: "080027123456", type: "dhcp", adapt
 
 - **Adapter Selection (`adapter: "1"`)**: Targets the first network adapter for configuration. While the first adapter is often used for the default NAT interface, here it's repurposed for a private network, demonstrating flexibility in network setup.
 
-- **Disable Auto-Configuration (`auto_config: false`)**: This option provides manual control over the network setup, bypassing Vagrant's automatic network configuration. It's particularly valuable for complex network arrangements or specific manual setups within the VM.
+- **Disable Auto-Configuration (`auto_config: false`)**: This option provides manual control over the network setup, bypassing Vagrant's automatic network configuration. It's particularly valuable for complex network arrangements or specific manual setups within the VM. In our case it tells Vagrant to NOT create the default NAT interface, it will therefore fall back on the defined intnet.
 
 - **Internal Network Connection (`virtualbox__intnet: "server"`)**: Connects the VM to an internal network named "server." Internal networks in VirtualBox are isolated, accessible only to guest VMs, offering an environment ideal for secure, contained networking.
 
