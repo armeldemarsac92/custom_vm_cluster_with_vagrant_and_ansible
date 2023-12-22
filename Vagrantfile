@@ -33,7 +33,6 @@ Vagrant.configure("2") do |config|
     dhcp_server.vm.network "private_network", ip: "192.168.42.128",
       virtualbox__intnet: "employee"
 
-
     dhcp_server.vm.provider "virtualbox" do |vb|
       vb.gui = false
       vb.name = "dhcp_server"
@@ -43,10 +42,10 @@ Vagrant.configure("2") do |config|
 
     end
 
-
     # To setup python39
     dhcp_server.vm.provision "shell", inline: <<-SHELL
       pkg_add -r python-3.9.18
+      #ln -s /usr/local/bin/python3.9.18 /usr/local/bin/python
     SHELL
 
     dhcp_server.vm.provision "ansible" do |ansible|
@@ -68,7 +67,7 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.hostname = "webserver"
 
-    webserver.vm.network "private_network", type: "dhcp", virtualbox__intnet: "server"
+    webserver.vm.network "private_network", mac: "080027123456", type: "dhcp", adapter: "1", auto_config: false, virtualbox__intnet: "server"
 
     webserver.ssh.host = "localhost"
 
@@ -76,8 +75,6 @@ Vagrant.configure("2") do |config|
 
     webserver.vm.provider "virtualbox" do |vb|
 
-      # vb.customize ["modifyvm", :id, "--nic1", "none"]
-      vb.customize ["modifyvm", :id, "--macaddress2", "080027123456"]
       vb.gui = false
       vb.name = "webserver"
       vb.memory = 2048
@@ -107,7 +104,7 @@ Vagrant.configure("2") do |config|
 
     employee.vm.hostname = "employee"
 
-    employee.vm.network "private_network", mac: "080027123457", type: "dhcp", adapter: "1", virtualbox__intnet: "employee"
+    employee.vm.network "private_network", mac: "080027123457", type: "dhcp", adapter: "1", auto_config: false, virtualbox__intnet: "employee"
 
     employee.ssh.host = "localhost"
 
@@ -115,9 +112,6 @@ Vagrant.configure("2") do |config|
 
     employee.vm.provider "virtualbox" do |vb|
 
-      # vb.customize ["modifyvm"]
-      # vb.customize ["modifyvm", :id, "--nic1", "none"]
-      #vb.customize ["modifyvm", :id, "--macaddress1", "080027123457"]
       vb.gui = true
       vb.name = "employee"
       vb.memory = 2048
@@ -134,23 +128,22 @@ Vagrant.configure("2") do |config|
       administration.vm.synced_folder ".", "/vagrant", disabled: true
   
       administration.vm.hostname = "administration"
-  
-      administration.vm.network "private_network", type: "dhcp", adapter: "1", virtualbox__intnet: "administration"
 
+      administration.vm.network "private_network", mac: "080027123458", type: "dhcp", adapter: "1", auto_config: false, virtualbox__intnet: "administration"
+  
       administration.ssh.host = "localhost"
 
       administration.ssh.port = 3503
   
       administration.vm.provider "virtualbox" do |vb|
-  
-        # vb.customize ["modifyvm", :id, "--nic1", "none"]
-        vb.customize ["modifyvm", :id, "--macaddress2", "080027123458"]
+
         vb.gui = true
         vb.name = "administration"
         vb.memory = 2048
         vb.cpus = 2
   
       end
+
 
     end
 
